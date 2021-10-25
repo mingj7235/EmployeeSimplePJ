@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -70,8 +71,31 @@ public class EmployeeService {
         employeeRep.delete(findEntity(employId));
     }
 
+    public List<EmployeeDto> findKeyWord (String keyword) {
+
+        List<EmployeeDto> result = new ArrayList<>();
+
+        getListEmployee().stream().filter(dto -> {
+            if (dto.getEmail().contains(keyword)) {
+                result.add(dto);
+            } else if (dto.getName().contains(keyword)) {
+                result.add(dto);
+            } else if (dto.getEmployNum().contains(keyword)) {
+                result.add(dto);
+            } else if (dto.getPhonenum().contains(keyword)) {
+                result.add(dto);
+            } else if (dto.getPosition().contains(keyword)) {
+                result.add(dto);
+            }
+            return true;
+        });
+        return result;
+    }
+
     //내부 메소드
     private Employee findEntity (Long employId) {
         return employeeRep.findById(employId).orElseThrow(CannotFindEmplException::new);
     }
+
+
 }

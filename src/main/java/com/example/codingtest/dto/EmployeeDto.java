@@ -33,6 +33,10 @@ public class EmployeeDto {
         this.email = entity.getEmail();
     }
 
+    public EmployeeDto (Employee entity, Long Id) {
+
+    }
+
     public Employee toEntity () {
         return Employee.builder()
                 .position(position)
