@@ -52,6 +52,7 @@ public class EmployeeService {
         return listDto;
     }
 
+    // 비교 기준 만들기
     class EmployeNameComparator implements Comparator<EmployeeDto> {
         @Override
         public int compare(EmployeeDto o1, EmployeeDto o2) {
@@ -61,13 +62,16 @@ public class EmployeeService {
     }
     // 직원 수정
     public EmployeeDto updateEmployee (Long employId, EmployeeDto employeeDto) {
-        Employee employee = employeeRep.findById(employId).orElseThrow(CannotFindEmplException::new);
-        return new EmployeeDto (employee.setEntity(employeeDto));
+        return new EmployeeDto (findEntity(employId).setEntity(employeeDto));
     }
 
     //직원 삭제
     public void deleteEmploy (Long employId) {
-        Employee employee = employeeRep.findById(employId).orElseThrow(CannotFindEmplException::new);
-        employeeRep.delete(employee);
+        employeeRep.delete(findEntity(employId));
+    }
+
+    //내부 메소드
+    private Employee findEntity (Long employId) {
+        return employeeRep.findById(employId).orElseThrow(CannotFindEmplException::new);
     }
 }
