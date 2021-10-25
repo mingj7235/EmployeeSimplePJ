@@ -71,6 +71,7 @@ public class EmployeeService {
         employeeRep.delete(findEntity(employId));
     }
 
+    //직원 검색 (원시적 방법)
     public List<EmployeeDto> findKeyWord (String keyword) {
 
         List<EmployeeDto> result = new ArrayList<>();
@@ -96,6 +97,5 @@ public class EmployeeService {
     private Employee findEntity (Long employId) {
         return employeeRep.findById(employId).orElseThrow(CannotFindEmplException::new);
     }
-
 
 }
