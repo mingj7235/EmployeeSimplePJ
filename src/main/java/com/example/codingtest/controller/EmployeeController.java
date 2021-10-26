@@ -32,6 +32,11 @@ public class EmployeeController {
         return employeeService.updateEmployee(employId, employeeDto);
     }
 
+    @GetMapping(value = "/employee/search/{keyword}")
+    public List<EmployeeDto> searchEmpByKeyword (@PathVariable String keyword) {
+        return employeeService.findKeyWord(keyword);
+    }
+
     @DeleteMapping (value = "/employee/{employId}")
     public void deleteEmployee (@PathVariable Long employId) {
         employeeService.deleteEmploy(employId);
