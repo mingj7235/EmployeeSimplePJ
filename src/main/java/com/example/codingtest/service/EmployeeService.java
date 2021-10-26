@@ -38,6 +38,7 @@ public class EmployeeService {
         List<Employee> listEntity = employeeRep.findAll();
         List<EmployeeDto> listDto = employeeRep.findAll().stream().map(EmployeeDto::new).collect(Collectors.toList());
         int size = listDto.size();
+        System.out.println(size);
 
         for (int i = 0; i < size; i ++) {
             int id = Integer.valueOf(listEntity.get(i).getEmployNum());
